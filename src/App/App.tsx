@@ -15,8 +15,7 @@ const App: React.FC = () => {
         const config = {
           headers: {
             "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjhlNDBhZTZjYjE1MDAwMjE3ZWI3NmMiLCJpYXQiOjE2NTM0ODk4Mzh9.P43SoMt8YGai77zEXXdUZrWmEoRxZWx-c7rDqfIAdIQ",
+            Authorization: `Bearer ${import.meta.env.VITE_APP_TOKEN}`,
           },
         };
 
@@ -33,8 +32,7 @@ const App: React.FC = () => {
         const config = {
           headers: {
             "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjhlNDBhZTZjYjE1MDAwMjE3ZWI3NmMiLCJpYXQiOjE2NTM0ODk4Mzh9.P43SoMt8YGai77zEXXdUZrWmEoRxZWx-c7rDqfIAdIQ",
+            Authorization: `Bearer ${import.meta.env.VITE_APP_TOKEN}`,
           },
         };
 

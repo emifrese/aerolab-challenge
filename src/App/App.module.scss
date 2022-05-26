@@ -73,5 +73,10 @@
   .allProducts {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
   }
 }

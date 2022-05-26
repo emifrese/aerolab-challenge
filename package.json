@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
