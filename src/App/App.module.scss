@@ -8,6 +8,16 @@
   }
 }
 
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.75)
+}
+
 .container {
   width: 100%;
   height: 100%;
@@ -80,4 +90,45 @@
       width: 100%;
     }
   }
+}
+
+
+
+
+.modal__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  animation-name: slideDown;
+  animation-duration: 300ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  border-radius: 14px;
+  background-color: rgb(31,31,31);
+  padding: 1rem;
+  position: fixed;
+  top: 3rem;
+  z-index: 30;
+  width: 90%;
+  max-height: 90vh;
+  overflow:auto;
+}
+
+  @keyframes slideDown {
+      0% {opacity: 0; transform: translateY(-3rem)}
+      100% {opacity: 1; transform: translateY(0)}
+  }
+
+  .card {
+    border-radius: 12px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    border: 2px solid red;
+    height: 100%;
+
+    .historyList{
+      overflow: auto;
+    }
 }

@@ -35,9 +35,25 @@ export const userSlice = createSlice({
       state._id = action.payload._id;
     },
     purchase: (state, action: PayloadAction<Type>) => {
-      const newHistory = [...state.redeemHistory, action.payload];
+      const existingHistoryItemIndex = state.redeemHistory.findIndex(
+        (item) => item._id === action.payload._id,
+      );
 
-      state.redeemHistory = newHistory;
+      const existingHistoryItem = state.redeemHistory[existingHistoryItemIndex];
+
+      if (existingHistoryItem) {
+        state.redeemHistory[existingHistoryItemIndex].amount++;
+      } else {
+        state.redeemHistory.push(action.payload);
+        const newItem = {...state.redeemHistory[state.redeemHistory.length - 1], amount: 1};
+
+        state.redeemHistory[state.redeemHistory.length - 1] = newItem;
+      }
+
+      state.points -= action.payload.cost;
+    },
+    addCoins: (state, action: PayloadAction<number>) => {
+      state.points += action.payload;
     },
   },
 });
