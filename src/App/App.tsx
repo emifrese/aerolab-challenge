@@ -19,10 +19,7 @@ import styles from "./App.module.scss";
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
-  const filterProducts = useAppSelector((state) => state.products.filterProducts);
-  const displayProducts = useAppSelector((state) => state.products.show);
-  const pages = useAppSelector((state) => state.products.pages);
-  const currentPage = useAppSelector((state) => state.products.currentPage);
+  const showingProducts = useAppSelector((state) => state.products.showingProducts);
   const [modalHistory, setModalHistory] = useState(false);
   const [modalCoins, setModalCoins] = useState(false);
 
@@ -40,9 +37,6 @@ const App: React.FC = () => {
     "PC Accessories",
     "Tablets & E-readers",
   ];
-
-  console.log(user);
-  console.log(filterProducts);
 
   async function addCoins(amount: number) {
     try {
@@ -107,7 +101,7 @@ const App: React.FC = () => {
   const content: JSX.Element[] = [];
   const options: JSX.Element[] = [];
 
-  for (const product of filterProducts) {
+  for (const product of showingProducts) {
     const card = (
       <div key={product._id}>
         <figure>
@@ -125,12 +119,6 @@ const App: React.FC = () => {
 
     content.push(card);
   }
-  const indexContent: number = currentPage * displayProducts - displayProducts;
-
-  console.log(indexContent);
-  const showContent: JSX.Element[] = content;
-
-  showContent.slice(indexContent, displayProducts);
 
   for (const option of categories) {
     const item = (
@@ -204,7 +192,7 @@ const App: React.FC = () => {
         </div>
         <button onClick={() => dispatch(productsActions.sort())}>Sort</button>
         <select onChange={(e) => categoryHandler(e.target.value)}>{options}</select>
-        <div className={styles.allProducts}>{showContent}</div>
+        <div className={styles.allProducts}>{content}</div>
       </main>
       <button onClick={() => dispatch(productsActions.changePage("sub"))}>Prev Page</button>
       <button onClick={() => dispatch(productsActions.changePage("add"))}>NextPage</button>

@@ -14,6 +14,7 @@ export interface Type {
 interface ProductsState {
   products: Type[];
   filterProducts: Type[];
+  showingProducts: Type[];
   sortIncrement: boolean;
   show: number;
   pages: number;
@@ -23,6 +24,7 @@ interface ProductsState {
 const initialState: ProductsState = {
   products: [],
   filterProducts: [],
+  showingProducts: [],
   sortIncrement: false,
   show: 16,
   pages: 1,
@@ -36,9 +38,14 @@ export const productsSlice = createSlice({
     getAllProducts: (state, action: PayloadAction<Type[]>) => {
       state.products = action.payload;
       state.filterProducts = action.payload;
+      state.showingProducts = state.filterProducts.slice(
+        state.currentPage * state.show - state.show,
+        state.show,
+      );
+      state.pages = Math.ceil(state.filterProducts.length / state.show);
     },
     sort: (state) => {
-      state.products.sort((a, b) => {
+      state.filterProducts.sort((a, b) => {
         if (!state.sortIncrement) {
           return a.cost - b.cost;
         }
@@ -46,6 +53,11 @@ export const productsSlice = createSlice({
         return b.cost - a.cost;
       });
       state.sortIncrement = !state.sortIncrement;
+      const indexInit: number = state.currentPage * state.show - state.show;
+      const indexEnd: number =
+        Math.floor(state.filterProducts.length / state.pages) * state.currentPage;
+
+      state.showingProducts = state.filterProducts.slice(indexInit, indexEnd);
     },
     filter: (state, action: PayloadAction<string>) => {
       switch (action.payload) {
@@ -109,16 +121,22 @@ export const productsSlice = createSlice({
           break;
       }
       state.pages = Math.ceil(state.filterProducts.length / state.show);
-      console.log(Math.ceil(state.filterProducts.length / state.show));
-      console.log(state.filterProducts.length);
+      state.currentPage = 1;
+      const indexInit: number = state.currentPage * state.show - state.show;
+
+      state.showingProducts = state.filterProducts.slice(indexInit, state.show);
     },
     changePage: (state, action: PayloadAction<string>) => {
       if (action.payload === "add" && state.currentPage < state.pages) {
-        console.log("add");
-        state.currentPage++;
-      } else if (action.payload === "sub" && state.currentPage > state.pages) {
-        state.currentPage--;
+        state.currentPage += 1;
+      } else if (action.payload === "sub" && state.currentPage > 1) {
+        state.currentPage -= 1;
       }
+      const indexInit: number = state.currentPage * state.show - state.show;
+      const indexEnd: number =
+        Math.floor(state.filterProducts.length / state.pages) * state.currentPage;
+
+      state.showingProducts = state.filterProducts.slice(indexInit, indexEnd);
     },
   },
 });
