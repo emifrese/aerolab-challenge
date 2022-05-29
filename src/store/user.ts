@@ -11,6 +11,7 @@ interface UserState {
   redeemHistory: Array<Type>;
   __v: number;
   _id: string;
+  cartItems: number;
 }
 
 const initialState: UserState = {
@@ -20,6 +21,7 @@ const initialState: UserState = {
   redeemHistory: [],
   __v: 0,
   _id: "",
+  cartItems: 0,
 };
 
 export const userSlice = createSlice({
@@ -48,6 +50,7 @@ export const userSlice = createSlice({
         const newItem = {...state.redeemHistory[state.redeemHistory.length - 1], amount: 1};
 
         state.redeemHistory[state.redeemHistory.length - 1] = newItem;
+        state.cartItems += 1;
       }
 
       state.points -= action.payload.cost;

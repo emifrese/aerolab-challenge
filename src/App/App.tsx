@@ -8,6 +8,7 @@ import {useAppSelector, useAppDispatch} from "~/hooks";
 import clienteAxios from "../config/axios";
 import logo from "../assets/logo.svg";
 import header from "../assets/header.png";
+import cart from "../assets/shopping-cart.png";
 import coin from "../assets/icons/coin.svg";
 import Modal from "~/components/UI/Modal";
 import Card from "~/components/Card";
@@ -103,17 +104,20 @@ const App: React.FC = () => {
 
   for (const product of showingProducts) {
     const card = (
-      <div key={product._id}>
+      <div
+        key={product._id}
+        className={styles.productElement}
+        onClick={() => dispatch(userActions.purchase(product))}
+      >
         <figure>
-          <figcaption>{product.name}</figcaption>
           <img alt="Best-Sale" src={product.img.url} />
+          <figcaption>{product.name}</figcaption>
         </figure>
-        <p>{product.cost}</p>
-        {user.points >= product.cost ? (
-          <button onClick={() => dispatch(userActions.purchase(product))}>Purchase</button>
-        ) : (
-          <p>Te faltan {product.cost - user.points}</p>
-        )}
+        <p className={styles.productCost}>{product.cost}</p>
+        <div>
+          <img alt="Aerolab" src={coin} />
+        </div>
+        {user.points < product.cost && <p>Te faltan {product.cost - user.points}</p>}
       </div>
     );
 
@@ -165,23 +169,30 @@ const App: React.FC = () => {
               <img alt="Aerolab" src={logo} width={32} />
             </div>
             <ul>
+              <li onClick={() => toggleCoinsHandler()}>
+                <figure>
+                  <label>{user.points}</label>
+                  <img alt="Coin" src={coin} />
+                </figure>
+              </li>
               <li
                 onClick={() => {
-                  toggleCoinsHandler();
+                  toggleHistoryHandler();
                 }}
               >
-                {user.name}
-              </li>
-              <li onClick={() => toggleHistoryHandler()}>
-                {user.points}
-                <img alt="Coin" src={coin} width={16} />
+                <figure>
+                  <label className={styles.shoppingLabel}>{user.cartItems}</label>
+                  <img alt="shopping-cart" src={cart} />
+                </figure>
               </li>
             </ul>
           </nav>
           <h1>
-            <img alt="Aerolab" src={header} />
+            <figure>
+              <label>Hot sales</label>
+              <img alt="Aerolab" src={header} />
+            </figure>
           </h1>
-          <h3>Lets get this party started</h3>
         </header>
         <div>
           <p>Best Sale</p>

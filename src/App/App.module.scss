@@ -21,25 +21,30 @@
 .container {
   width: 100%;
   height: 100%;
-  border: 2px solid red;
+  // border: 2px solid red;
 
   .header {
+    margin-bottom: 120px;
+
     nav {
       position: fixed;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 5px;
-      top: 0;
+      top: 5px;
       height: 50px;
       width: 100%;
-      border: 2px solid red;
+      // border: 2px solid #354259;
       border-radius: 50px;
-      background-color: aqua;
+      background-color: #354259;
+      color: white;
       
       .navLogo {
         margin-left: 10px;
-        border: 2px solid red;
+        // border: 2px solid red;
+        border-radius: 50%;
+        padding: 4px;
       }
       ul {
         list-style: none;
@@ -53,8 +58,36 @@
           margin: 10px;
           padding: 5px 10px;
           gap: 5px;
-          border: 2px solid red;
-          border-radius: 10px;
+          // border: 1px solid #5c749c;
+          border-radius: 25px;
+          background-color: #5c749c;
+          box-shadow: inset 0 0 10px #354259;
+
+          figure {
+            margin: 0;
+            display: flex;
+            justify-content: flex-start;
+
+            label {
+              margin-right: 5px;
+              line-height: 18px;
+            }
+
+            img {
+              width: 1.2rem;
+            }
+
+            .shoppingLabel {
+              // border: 1px solid white;
+              border-radius: 50%;
+              font-size: 15px;
+              width: 18px;
+              height: 18px;
+              line-height: 18px;
+            }
+          }
+
+          
         }
       }
     }
@@ -63,14 +96,21 @@
       font-weight: 800;
       font-size: 2rem;
       margin: 0;
-      margin-top: 50px;
+      margin-top: 60px;
       margin-bottom: 6px;
       max-height: 100px;
-    
+      text-align: start;
 
-      img {
-        max-width: 100%;
+      figure {
+        margin: 0;
+
+        img {
+          max-width: 100%;
+          border-radius: 25px;
+        }
       }
+
+      
     }
 
     h3 {
@@ -85,9 +125,51 @@
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
     align-items: center;
+    gap: 10px;
 
     img {
       width: 100%;
+    }
+
+    .productElement {
+      border-radius: 25px;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      box-shadow: inset 0 0 10px #5c749c;
+
+      figure {
+        // border: 2px solid red;
+        border-radius: 25px;
+        text-align: center;
+        margin: 0;
+        width: 100%;
+        padding: 20px;
+        background-color: white;
+      }
+
+      button {
+        border-radius: 25px;
+        background-color: #354259;
+        color: white;
+        border: none;
+        height: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-right: 10px;
+      }
+
+      .productCost {
+        margin:0;
+      }
+
+      div {
+        img {
+          width: 1.2rem;
+        }
+      }
     }
   }
 }
