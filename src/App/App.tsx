@@ -10,6 +10,8 @@ import logo from "../assets/logo.svg";
 import header from "../assets/header.png";
 import cart from "../assets/shopping-cart.png";
 import coin from "../assets/icons/coin.svg";
+import prevArrow from "../assets/icons/arrow-left.svg";
+import nextArrow from "../assets/icons/arrow-right.svg";
 import Modal from "~/components/UI/Modal";
 import Card from "~/components/Card";
 import History from "~/components/user/History";
@@ -21,6 +23,9 @@ const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const showingProducts = useAppSelector((state) => state.products.showingProducts);
+  const sortDir = useAppSelector((state) => state.products.sortIncrement);
+  const pages = useAppSelector((state) => state.products.pages);
+  const currentPage = useAppSelector((state) => state.products.currentPage);
   const [modalHistory, setModalHistory] = useState(false);
   const [modalCoins, setModalCoins] = useState(false);
 
@@ -103,20 +108,26 @@ const App: React.FC = () => {
   const options: JSX.Element[] = [];
 
   for (const product of showingProducts) {
+    const buyFunction =
+      user.points >= product.cost ? () => dispatch(userActions.purchase(product)) : () => null;
+
     const card = (
       <div
         key={product._id}
-        className={styles.productElement}
-        onClick={() => dispatch(userActions.purchase(product))}
+        className={user.points < product.cost ? styles.productExpensive : styles.productElement}
+        onClick={buyFunction}
       >
-        <figure>
+        <figure className={styles.imageCard}>
           <img alt="Best-Sale" src={product.img.url} />
           <figcaption>{product.name}</figcaption>
         </figure>
-        <p className={styles.productCost}>{product.cost}</p>
-        <div>
-          <img alt="Aerolab" src={coin} />
-        </div>
+        {user.points >= product.cost && (
+          <figure className={styles.priceCard}>
+            <figcaption className={styles.productCost}>{product.cost}</figcaption>
+
+            <img alt="Aerolab" src={coin} />
+          </figure>
+        )}
         {user.points < product.cost && <p>Te faltan {product.cost - user.points}</p>}
       </div>
     );
@@ -166,12 +177,12 @@ const App: React.FC = () => {
         <header className={styles.header}>
           <nav>
             <div className={styles.navLogo}>
-              <img alt="Aerolab" src={logo} width={32} />
+              <img alt="Aerolab" src={logo} />
             </div>
             <ul>
               <li onClick={() => toggleCoinsHandler()}>
                 <figure>
-                  <label>{user.points}</label>
+                  <figcaption>{user.points}</figcaption>
                   <img alt="Coin" src={coin} />
                 </figure>
               </li>
@@ -181,7 +192,7 @@ const App: React.FC = () => {
                 }}
               >
                 <figure>
-                  <label className={styles.shoppingLabel}>{user.cartItems}</label>
+                  <figcaption className={styles.shoppingLabel}>{user.cartItems}</figcaption>
                   <img alt="shopping-cart" src={cart} />
                 </figure>
               </li>
@@ -189,24 +200,37 @@ const App: React.FC = () => {
           </nav>
           <h1>
             <figure>
-              <label>Hot sales</label>
+              <figcaption>Hot sales</figcaption>
               <img alt="Aerolab" src={header} />
             </figure>
           </h1>
         </header>
-        <div>
-          <p>Best Sale</p>
-          <img
-            alt="Best-Sale"
-            src="https://coding-challenge-api.aerolab.co/images/iPhone8-x1.png"
-          />
+        <div className={styles.filterSection}>
+          <select onChange={(e) => categoryHandler(e.target.value)}>{options}</select>
+          <button onClick={() => dispatch(productsActions.sort())}>
+            Sort {sortDir ? "Decreasing" : "Increasing"}
+          </button>
         </div>
-        <button onClick={() => dispatch(productsActions.sort())}>Sort</button>
-        <select onChange={(e) => categoryHandler(e.target.value)}>{options}</select>
-        <div className={styles.allProducts}>{content}</div>
+        <div>
+          {content.length < 1 && (
+            <figure>
+              <img alt="Aerolab" className={styles.loadingLogo} src={logo} width={128} />
+              <figcaption>Loading...</figcaption>
+            </figure>
+          )}
+          {content.length === showingProducts.length && (
+            <div className={styles.allProducts}>{content}</div>
+          )}
+        </div>
+        <div className={styles.pageChanger}>
+          {currentPage > 1 && (
+            <img src={prevArrow} onClick={() => dispatch(productsActions.changePage("sub"))} />
+          )}
+          {currentPage < pages && (
+            <img src={nextArrow} onClick={() => dispatch(productsActions.changePage("add"))} />
+          )}
+        </div>
       </main>
-      <button onClick={() => dispatch(productsActions.changePage("sub"))}>Prev Page</button>
-      <button onClick={() => dispatch(productsActions.changePage("add"))}>NextPage</button>
     </>
   );
 };

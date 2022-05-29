@@ -65,57 +65,45 @@ export const productsSlice = createSlice({
           state.filterProducts = state.products;
           break;
         case "Phones":
-          state.filterProducts = state.filterProducts.filter(
-            (product) => product.category === "Phones",
-          );
+          state.filterProducts = state.products.filter((product) => product.category === "Phones");
           break;
         case "Gaming":
-          state.filterProducts = state.filterProducts.filter(
-            (product) => product.category === "Gaming",
-          );
+          state.filterProducts = state.products.filter((product) => product.category === "Gaming");
           break;
         case "Laptops":
-          state.filterProducts = state.filterProducts.filter(
-            (product) => product.category === "Laptops",
-          );
+          state.filterProducts = state.products.filter((product) => product.category === "Laptops");
           break;
         case "Cameras":
-          state.filterProducts = state.filterProducts.filter(
-            (product) => product.category === "Cameras",
-          );
+          state.filterProducts = state.products.filter((product) => product.category === "Cameras");
           break;
         case "Audio":
-          state.filterProducts = state.filterProducts.filter(
-            (product) => product.category === "Audio",
-          );
+          state.filterProducts = state.products.filter((product) => product.category === "Audio");
           break;
         case "Monitors & TV":
-          state.filterProducts = state.filterProducts.filter(
+          state.filterProducts = state.products.filter(
             (product) => product.category === "Monitors & TV",
           );
           break;
         case "Drones":
-          state.filterProducts = state.filterProducts.filter(
-            (product) => product.category === "Drones",
-          );
+          state.filterProducts = state.products.filter((product) => product.category === "Drones");
           break;
         case "Phone Accessories":
-          state.filterProducts = state.filterProducts.filter(
+          state.filterProducts = state.products.filter(
             (product) => product.category === "Phone Accessories",
           );
           break;
         case "Smart Home":
-          state.filterProducts = state.filterProducts.filter(
+          state.filterProducts = state.products.filter(
             (product) => product.category === "Smart Home",
           );
           break;
         case "PC Accessories":
-          state.filterProducts = state.filterProducts.filter(
+          state.filterProducts = state.products.filter(
             (product) => product.category === "PC Accessories",
           );
           break;
         case "Tablets & E-readers":
-          state.filterProducts = state.filterProducts.filter(
+          state.filterProducts = state.products.filter(
             (product) => product.category === "Tablets & E-readers",
           );
           break;

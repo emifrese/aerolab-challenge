@@ -1,3 +1,17 @@
+@keyframes click {
+  0% {
+    box-shadow: none;
+  }
+
+  50% {
+    box-shadow: inset 0 0 10px #5c749c;
+  }
+
+  100% {
+    box-shadow: none;
+  }
+}
+
 @keyframes fly {
   0% {
     transform: translateY(0) rotateX(0);
@@ -7,6 +21,9 @@
     transform: translateY(-40px) rotate3d(3, 2, 1, 30deg);
   }
 }
+
+
+
 
 .backdrop {
   position: fixed;
@@ -21,7 +38,11 @@
 .container {
   width: 100%;
   height: 100%;
-  // border: 2px solid red;
+
+  .loadingLogo {
+      margin-top: 50px;
+      animation: fly 3s infinite alternate ease-in-out;    
+  }
 
   .header {
     margin-bottom: 120px;
@@ -32,19 +53,20 @@
       justify-content: space-between;
       align-items: center;
       padding: 5px;
-      top: 5px;
+      top: 0;
       height: 50px;
       width: 100%;
-      // border: 2px solid #354259;
-      border-radius: 50px;
       background-color: #354259;
       color: white;
       
       .navLogo {
         margin-left: 10px;
-        // border: 2px solid red;
         border-radius: 50%;
         padding: 4px;
+
+        img {
+          width: 32px;
+        }
       }
       ul {
         list-style: none;
@@ -58,7 +80,6 @@
           margin: 10px;
           padding: 5px 10px;
           gap: 5px;
-          // border: 1px solid #5c749c;
           border-radius: 25px;
           background-color: #5c749c;
           box-shadow: inset 0 0 10px #354259;
@@ -68,7 +89,7 @@
             display: flex;
             justify-content: flex-start;
 
-            label {
+            figcaption {
               margin-right: 5px;
               line-height: 18px;
             }
@@ -78,7 +99,6 @@
             }
 
             .shoppingLabel {
-              // border: 1px solid white;
               border-radius: 50%;
               font-size: 15px;
               width: 18px;
@@ -119,35 +139,80 @@
       margin: 0;
     }
   }
+
+  .filterSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    button {
+      width: 45%;
+      margin-top: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 15px;
+      border-radius: 10px;
+      background-color: #5c749c;
+      color: white;
+      outline: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    select {
+      border-style: none;
+      width: 60%;
+      font-size: 15px;
+      border-radius: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: #5c749c;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    select:active, select:focus {
+      outline: none
+    }
+  }
   
   .allProducts {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+    padding: 20px;
+    
 
     img {
       width: 100%;
     }
 
     .productElement {
+      cursor: pointer;
+    }
+
+    .productElement, .productExpensive {
       border-radius: 25px;
       padding: 10px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      box-shadow: inset 0 0 10px #5c749c;
+      transition: 0.3s;
+      height: 175px;
+      font-size: 13px;
 
       figure {
-        // border: 2px solid red;
+        
         border-radius: 25px;
         text-align: center;
         margin: 0;
         width: 100%;
         padding: 20px;
-        background-color: white;
+        padding-bottom: 0;
       }
 
       button {
@@ -165,11 +230,49 @@
         margin:0;
       }
 
-      div {
+      .priceCard {
+        display: flex;
+        justify-content: center;
+        padding-top: 0;
+
+        figcaption {
+          margin-right: 5px;
+          line-height: 18px;
+          font-weight: 600;
+        }
+
         img {
           width: 1.2rem;
         }
       }
+      
+    }
+
+    .productExpensive {
+      border: 2px solid red
+    }
+
+    .productElement:hover,.productElement:active {
+      
+      animation-name: click;
+      animation-duration: 1.5s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    }
+  }
+
+
+  .pageChanger{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    img {
+      background-color: #5c749c;
+      height: 48px;
+      width:48px;
+      border-radius: 50%;
+      cursor: pointer;
     }
   }
 }
@@ -189,7 +292,7 @@
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
   border-radius: 14px;
-  background-color: rgb(31,31,31);
+  
   padding: 1rem;
   position: fixed;
   top: 3rem;
@@ -207,10 +310,215 @@
   .card {
     border-radius: 12px;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
-    border: 2px solid red;
     height: 100%;
+    background-color: #5c749c;
+
+    
+    .coinsManager {
+      padding: 5px;
+      border-radius: inherit;
+      background-color: #354259;
+      color: white;
+
+      p {
+      text-align: center;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-around;
+        padding: 0;
+
+        li {
+          border-radius: 10px;
+          padding: 5px;
+          padding-left: 10px;
+          padding-right: 10px;
+          background-color: #5c749c;
+        }
+      }
+    }
 
     .historyList{
       overflow: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      li {
+        display: flex;
+        max-height: 100px;
+        
+        background-color: white;
+        margin: 10px;
+        border-radius: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+        
+        p {
+          width: 20%;
+          margin: auto;
+          text-align: center;
+        }
+
+        div {
+          width: 20%;
+          margin: auto;
+
+          img {
+            width: 80%
+          }
+        }
+
+        figure {
+          display: flex;
+          text-align: center;
+          width: 60%;
+          justify-content: flex-end;
+          margin-top: 10px;
+          margin-bottom: 10px;
+
+          figcaption {
+            margin: auto
+          }
+
+          img {
+            margin-left: 15px;
+            max-width: 60%;
+          }
+        }
+      }
     }
+
+    .historyEmpty {
+      padding: 10px;
+      color: white;
+      text-align: center;
+    }
+}
+
+@media screen and (min-width: 800px) {
+  .container {
+    .header {
+      nav {
+        height: 60px;
+        ul {
+          li {
+            figure {
+              figcaption {
+                line-height: 26px;
+              }
+              img {
+                width: 1.4rem;
+              }
+              .shoppingLabel {
+                font-size: 18px;
+                line-height: 24px;
+              }
+            }
+          }
+        }
+
+        .navLogo{
+          img{
+            width: 40px;
+          }
+        }
+      }
+    }
+
+    .allProducts {
+      img {
+        width: 50%;
+      }
+
+      .productElement, .productExpensive {
+        height: 230px;
+        font-size: 15px;
+      }
+    }
+
+    .filterSection {
+      margin-top: 250px;
+    }
+  }
+
+  .card {
+    .historyList {
+      li {
+        div {
+          text-align: center;
+          img {
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    display: grid;
+    grid-template-areas: "a b"
+                          "c b"
+                          "d b";
+    grid-template-rows: repeat(2, 150px) 100px;
+    grid-template-columns: 300px 1fr;
+    gap: 10px;
+    .header {
+      grid-area: a;
+      h1 {
+        margin: 0;
+      }
+    }
+
+    .filterSection {
+      grid-area: c;
+      margin-top: 50px;
+    }
+
+    .allProducts {
+      grid-area: b;
+      padding: 0;
+      gap: 0;
+      grid-template-columns: repeat(8, 1fr);
+
+      .productElement, .productExpensive {
+        font-size: 14px;
+        height: 175px;
+      }
+      
+    }
+
+    .pageChanger {
+      grid-area: d;
+      align-items: center;
+    }
+
+    .loadingLogo {
+      grid-area: b;
+      width: 35%
+    }
+  }
+
+  .card {
+    .historyList {
+      li {
+        font-size: 25px;
+        div {
+          text-align: center;
+          img {
+            width:25%;
+          }
+        }
+      }
+    }
+    .historyEmpty {
+      font-size: 25px;
+    }
+  }
 }

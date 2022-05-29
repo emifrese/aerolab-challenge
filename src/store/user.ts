@@ -58,6 +58,16 @@ export const userSlice = createSlice({
     addCoins: (state, action: PayloadAction<number>) => {
       state.points += action.payload;
     },
+    return: (state, action: PayloadAction<string>) => {
+      const returnItemIndex = state.redeemHistory.findIndex((item) => item._id === action.payload);
+
+      state.points +=
+        state.redeemHistory[returnItemIndex].cost * state.redeemHistory[returnItemIndex].amount;
+
+      state.cartItems -= 1;
+
+      state.redeemHistory = state.redeemHistory.filter((item) => item._id !== action.payload);
+    },
   },
 });
 
