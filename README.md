@@ -1,14 +1,15 @@
 ![Aerolab](./src/assets/logo.svg "Aerolab")
 
-# Aerolab challenge
-Se debe crear una tienda de productos basada en puntos.
 
-# API
-Podés encontrar la documentación [acá](https://aerolabchallenge.docs.apiary.io/) y podés obtener una API key [acá](https://aerolab.co/coding-challenge)
+# Aerolab challenge
+Challenge completado, basado en el repositorio https://github.com/goncy/aerolab-challenge .
+Utilice Modules SCSS para el estilo, TypeScript como lenguaje y React como librería.
+Agregué funcionalidades extras como el filtrado por categoría, la opción de eliminarlos productos comprados del historial de compra y diseño responsivo para moviles, tabletas y monitores de escritorio. 
+
+## Link del challenge resuelto
+https://brilliant-scone-0a2ce1.netlify.app/
 
 ## Definición funcional
-El usuario tiene una cantidad definida de puntos y cada producto vale una cantidad de puntos especifica.
-
 * Cada producto debe tener un precio en puntos de manera visible.
 * El usuario debería poder filtrar los productos por precio, de mayor a menor y viceversa.
 * El usuario debería poder ver cuantos puntos tienen en su cuenta.
@@ -22,6 +23,4 @@ El usuario tiene una cantidad definida de puntos y cada producto vale una cantid
 * No debo poder comprar un producto mientras cargo puntos o estoy comprando otro producto
 * Debe haber un máximo de 16 productos en pantalla pero debo poder cambiar de página para ver el resto
 
-## Definiciones técnicas
-* La aplicación debe estar publicada y debe ser accesible mediante un link.
-* El código de la aplicación debe estar subida a un repositorio de público acceso.
+
