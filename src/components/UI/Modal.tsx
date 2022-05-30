@@ -30,7 +30,7 @@ const ModalOverlay = ({children}: OverlayProps) => {
   );
 };
 
-const portalElement: HTMLElement | null = document.getElementById("overlays");
+const portalElement: HTMLElement | null = document.getElementById("overlays")!;
 
 const Modal = ({Toggle, children}: ModalProps) => {
   return (

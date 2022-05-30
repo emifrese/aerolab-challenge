@@ -1,10 +1,14 @@
+
+$dark-blue: #354259;
+$light-blue: #5c749c;
+
 @keyframes click {
   0% {
     box-shadow: none;
   }
 
   50% {
-    box-shadow: inset 0 0 10px #5c749c;
+    box-shadow: inset 0 0 10px $light-blue;
   }
 
   100% {
@@ -22,8 +26,10 @@
   }
 }
 
-
-
+@keyframes slideDown {
+  0% {opacity: 0; transform: translateY(-3rem)}
+  100% {opacity: 1; transform: translateY(0)}
+}
 
 .backdrop {
   position: fixed;
@@ -56,7 +62,7 @@
       top: 0;
       height: 50px;
       width: 100%;
-      background-color: #354259;
+      background-color: $dark-blue;
       color: white;
       
       .navLogo {
@@ -65,7 +71,7 @@
         padding: 4px;
 
         img {
-          width: 32px;
+          width: 2rem;
         }
       }
       ul {
@@ -81,8 +87,8 @@
           padding: 5px 10px;
           gap: 5px;
           border-radius: 25px;
-          background-color: #5c749c;
-          box-shadow: inset 0 0 10px #354259;
+          background-color: $light-blue;
+          box-shadow: inset 0 0 10px $dark-blue;
 
           figure {
             margin: 0;
@@ -152,7 +158,7 @@
       padding-bottom: 10px;
       font-size: 15px;
       border-radius: 10px;
-      background-color: #5c749c;
+      background-color: $light-blue;
       color: white;
       outline: none;
       border: none;
@@ -166,7 +172,7 @@
       border-radius: 10px;
       padding-top: 10px;
       padding-bottom: 10px;
-      background-color: #5c749c;
+      background-color: $light-blue;
       color: white;
       text-align: center;
       cursor: pointer;
@@ -217,7 +223,7 @@
 
       button {
         border-radius: 25px;
-        background-color: #354259;
+        background-color: $dark-blue;
         color: white;
         border: none;
         height: 30px;
@@ -268,9 +274,9 @@
     justify-content: space-around;
 
     img {
-      background-color: #5c749c;
-      height: 48px;
-      width:48px;
+      background-color: $light-blue;
+      height: 2.5rem;
+      width:2.5rem;
       border-radius: 50%;
       cursor: pointer;
     }
@@ -302,22 +308,18 @@
   overflow:auto;
 }
 
-  @keyframes slideDown {
-      0% {opacity: 0; transform: translateY(-3rem)}
-      100% {opacity: 1; transform: translateY(0)}
-  }
 
   .card {
     border-radius: 12px;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
     height: 100%;
-    background-color: #5c749c;
+    background-color: $light-blue;
 
     
     .coinsManager {
       padding: 5px;
       border-radius: inherit;
-      background-color: #354259;
+      background-color: $dark-blue;
       color: white;
 
       p {
@@ -335,7 +337,8 @@
           padding: 5px;
           padding-left: 10px;
           padding-right: 10px;
-          background-color: #5c749c;
+          background-color: $light-blue;
+          cursor: pointer
         }
       }
     }
@@ -369,7 +372,8 @@
           margin: auto;
 
           img {
-            width: 80%
+            width: 80%;
+            cursor: pointer
           }
         }
 
@@ -424,7 +428,7 @@
 
         .navLogo{
           img{
-            width: 40px;
+            width: 2.5rem;
           }
         }
       }
@@ -433,6 +437,39 @@
     .allProducts {
       img {
         width: 50%;
+      }
+
+      .productElement, .productExpensive {
+        height: 230px;
+        font-size: 15px;
+      }
+    }
+
+    .filterSection {
+      margin-top: 250px;
+    }
+  }
+
+  .card {
+    .historyList {
+      li {
+        div {
+          text-align: center;
+          img {
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .container {
+
+    .allProducts {
+      img {
+        width: 65%;
       }
 
       .productElement, .productExpensive {

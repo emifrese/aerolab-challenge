@@ -3,11 +3,11 @@ import React from "react";
 import styles from "../../App/App.module.scss";
 
 type AppProps = {
-  CoinsHandler: (amount: number) => void;
+  AddCoinsHandler: (amount: number) => void;
   Toggle: () => void;
 };
 
-const Coins: React.FC<AppProps> = ({CoinsHandler, Toggle}) => {
+const Coins: React.FC<AppProps> = ({AddCoinsHandler, Toggle}) => {
   return (
     <div className={styles.coinsManager}>
       <p>How much coins do yo want?</p>
@@ -15,7 +15,7 @@ const Coins: React.FC<AppProps> = ({CoinsHandler, Toggle}) => {
         <li
           value={1000}
           onClick={(e) => {
-            CoinsHandler(e.currentTarget.value);
+            AddCoinsHandler(e.currentTarget.value);
             Toggle();
           }}
         >
@@ -24,7 +24,7 @@ const Coins: React.FC<AppProps> = ({CoinsHandler, Toggle}) => {
         <li
           value={5000}
           onClick={(e) => {
-            CoinsHandler(e.currentTarget.value);
+            AddCoinsHandler(e.currentTarget.value);
             Toggle();
           }}
         >
@@ -33,7 +33,7 @@ const Coins: React.FC<AppProps> = ({CoinsHandler, Toggle}) => {
         <li
           value={7500}
           onClick={(e) => {
-            CoinsHandler(e.currentTarget.value);
+            AddCoinsHandler(e.currentTarget.value);
             Toggle();
           }}
         >
